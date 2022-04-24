@@ -1,1 +1,1 @@
-3 2 ADD ECHO HALT
+1 LBL 3 2 + . 1 JMP

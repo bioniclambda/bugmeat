@@ -118,11 +118,12 @@ function interpret(file)
 
 	local is_num = false
 
-	for i = 1, #tokens, 1 do
-		local token = tokens[i]
+	local index = 1
 
+	while (index <= #tokens) do
+		local token = tokens[index]
 		token = token:gsub('\n', '')
-
+		
 		-- Number
 		if (string.match(token, '%d')) then
 			stack:push(tonumber(token))
@@ -135,7 +136,7 @@ function interpret(file)
 			print('!')
 			break
 
-		elseif (token == 'ADD' or '+') then
+		elseif (token == 'ADD' or token == '+') then
 			val1 = stack:peek()
 			stack:swap()
 			val0 = stack:peek()
@@ -154,7 +155,7 @@ function interpret(file)
 
 			stack:push(stack:pop() + stack:pop())
 		
-		elseif (token == 'SUB' or '-') then
+		elseif (token == 'SUB' or token == '-') then
 				val1 = stack:peek()
 				stack:swap()
 				val0 = stack:peek()
@@ -173,7 +174,7 @@ function interpret(file)
 				
 				stack:push(stack:pop() - stack:pop())
 		
-		elseif (token == 'MUL' or '*') then
+		elseif (token == 'MUL' or token == '*') then
 			val1 = stack:peek()
 			stack:swap()
 			val0 = stack:peek()
@@ -192,7 +193,7 @@ function interpret(file)
 			
 			stack:push(stack:pop() * stack:pop())
 		
-		elseif (token == 'DIV' or '/') then
+		elseif (token == 'DIV' or token == '/') then
 			val1 = stack:peek()
 			stack:swap()
 			val0 = stack:peek()
@@ -211,7 +212,7 @@ function interpret(file)
 			
 			stack:push(stack:pop() / stack:pop())
 
-		elseif (token == 'MOD' or '%') then
+		elseif (token == 'MOD' or token == '%') then
 			val1 = stack:peek()
 			stack:swap()
 			val0 = stack:peek()
@@ -230,12 +231,9 @@ function interpret(file)
 			
 			stack:push(stack:pop() % stack:pop())
 
-		elseif (token == 'ECHO' or '.') then
+		elseif (token == 'ECHO' or token == '.') then
 			io.write(stack:pop())
-
---		elseif (byte == 'NUM') then
---			is_num = true
-
+		
 		elseif (token == 'SWAP') then
 			stack:swap()
 
@@ -253,7 +251,7 @@ function interpret(file)
 
 		elseif (token == 'LBL') then
 			if (stack:peek() > 0 and stack:peek() <= LABEL_LIMIT) then
-				labels[stack:peek()] = contentpos
+				labels[stack:pop()] = index -- we do not need to increase it, as the code that sets the index will already increase it!
 			end
 
 		elseif (token == 'CMP') then
@@ -276,56 +274,56 @@ function interpret(file)
 			end
 
 		elseif (token == 'JMP') then
-			contentpos = labels[stack:pop()]
-
+			index = labels[stack:pop()]
+			
 		elseif (token == 'JNZ') then
 			if (not FLAG_ZERO) then
-				contentpos = labels[stack:pop()]
+				index = labels[stack:pop()]
 			end
 
 		elseif (token == 'JIZ') then
 			if (FLAG_ZERO) then
-				contentpos = labels[stack:pop()]
+				index = labels[stack:pop()]
 			end
 
 		elseif (token == 'JIE') then
 			if (FLAG_EQUAL) then
-				contentpos = labels[stack:pop()]
+				index = labels[stack:pop()]
 			end
 
 		elseif (token == 'JNE') then
 			if (not FLAG_EQUAL) then
-				contentpos = labels[stack:pop()]
+				index = labels[stack:pop()]
 			end
 
 		elseif (token == 'JIG') then
 			if (FLAG_GREATER) then
-				contentpos = labels[stack:pop()]
+				index = labels[stack:pop()]
 			end
 
 		elseif (token == 'JIL') then
 			if (FLAG_LESSER) then
-				contentpos = labels[stack:pop()]
+				index = labels[stack:pop()]
 			end
 
 		elseif (token == 'JGE') then
-			if (FLAG_GREATER and FLAG_EQUAL) then
-				contentpos = labels[stack:pop()]
+			if (FLAG_GREATER or FLAG_EQUAL) then
+				index = labels[stack:pop()]
 			end
 
 		elseif (token == 'JLE') then
-			if (FLAG_LESSER and FLAG_EQUAL) then
-				contentpos = labels[stack:pop()]
+			if (FLAG_LESSER or FLAG_EQUAL) then
+				index = labels[stack:pop()]
 			end
 
 		elseif (token == 'JIP') then
 			if (not FLAG_NEG) then
-				contentpos = labels[stack:pop()]
+				index = labels[stack:pop()]
 			end
 
 		elseif (token == 'JIN') then
 			if (FLAG_NEG) then
-				contentpos = labels[stack:pop()]
+				index = labels[stack:pop()]
 			end
 
 		elseif (token == 'PUTC') then
@@ -335,6 +333,8 @@ function interpret(file)
 			io.write(str_stack:pop())
 		
 		end
+		
+		index = index + 1
 	end
 
 	sourcefile:close()
