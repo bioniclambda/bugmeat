@@ -9,7 +9,7 @@ Some things to note are:  <br/>
 * Postfix
 * All capitals
 
-Also, instead of +, -, \*, and / it's ADD, SUB, MUL, and DIV
+Also, math operators can use `+`, `-`, `*`, and `/` AS WELL AS `ADD`, `SUB`, `MUL`, and `DIV`
 
 NADA: Do nothing <br/>
 HALT: Stop program <br/>
@@ -17,6 +17,7 @@ ADD: Add latest 2 numbers <br/>
 SUB: Subtract latest 2 numbers <br/>
 MUL: Multiply latest 2 numbers <br/>
 DIV: Divide latest two numbers <br/>
+MOD: Get remainder of the second latest number on stack divided by the latest <br/>
 ECHO: Output latest number <br/>
 PUTC: Output latest number as corresponding ASCII code <br/>
 SWAP: Swap position of latest 2 items on stack <br/>
