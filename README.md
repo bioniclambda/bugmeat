@@ -13,19 +13,19 @@ Also, instead of +, -, \*, and / it's ADD, SUB, MUL, and DIV
 
 
 
-NADA: Do nothing
-HALT: Stop program
-ADD: Add latest 2 numbers
-SUB: Subtract latest 2 numbers
-MUL: Multiply latest 2 numbers
-DIV: Divide latest two numbers
-ECHO: Output latest number
-PUTC: Output latest number as corresponding ASCII code
-SWAP: Swap position of latest 2 items on stack
-DUP: Duplicate latest number on stack
-DROP: Empty stack
-DUMP: Output all numbers on stack
-LBL: Create a label with ID of latest number on stack at current position
-CMP: Compare
-JMP: Jump to label with ID latest number on stack
-I'll write the rest later
+NADA: Do nothing <br/>
+HALT: Stop program <br/>
+ADD: Add latest 2 numbers <br/>
+SUB: Subtract latest 2 numbers <br/>
+MUL: Multiply latest 2 numbers <br/>
+DIV: Divide latest two numbers <br/>
+ECHO: Output latest number <br/>
+PUTC: Output latest number as corresponding ASCII code <br/>
+SWAP: Swap position of latest 2 items on stack <br/>
+DUP: Duplicate latest number on stack <br/>
+DROP: Empty stack <br/>
+DUMP: Output all numbers on stack <br/>
+LBL: Create a label with ID of latest number on stack at current position <br/>
+CMP: Compare <br/>
+JMP: Jump to label with ID latest number on stack <br/>
+I'll write the rest later <br/>
