@@ -1,7 +1,7 @@
 # bugmeat
-The world's worst programming language <br/>
+The world's cutest programming language <br/>
 
-Yes I mean that, worse than other other language, C++, Python, Java, Assembly, JavaScript. Whatever you hate, this is worse. <br/>
+This language provides an unprecedented level of simplicity mixed with great design, allowing every programmer to express their creativity like no one has ever seen before.
 
 Okay so let's get basic syntax. <br/>
 Some things to note are:  <br/>
@@ -10,8 +10,6 @@ Some things to note are:  <br/>
 * All capitals
 
 Also, instead of +, -, \*, and / it's ADD, SUB, MUL, and DIV
-
-
 
 NADA: Do nothing <br/>
 HALT: Stop program <br/>
