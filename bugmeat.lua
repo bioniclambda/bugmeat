@@ -135,7 +135,7 @@ function interpret(file)
 			print('!')
 			break
 
-		elseif (token == 'ADD') then
+		elseif (token == 'ADD' or '+') then
 			val1 = stack:peek()
 			stack:swap()
 			val0 = stack:peek()
@@ -154,7 +154,7 @@ function interpret(file)
 
 			stack:push(stack:pop() + stack:pop())
 		
-		elseif (token == 'SUB') then
+		elseif (token == 'SUB' or '-') then
 				val1 = stack:peek()
 				stack:swap()
 				val0 = stack:peek()
@@ -173,7 +173,7 @@ function interpret(file)
 				
 				stack:push(stack:pop() - stack:pop())
 		
-		elseif (token == 'MUL') then
+		elseif (token == 'MUL' or '*') then
 			val1 = stack:peek()
 			stack:swap()
 			val0 = stack:peek()
@@ -192,7 +192,7 @@ function interpret(file)
 			
 			stack:push(stack:pop() * stack:pop())
 		
-		elseif (token == 'DIV') then
+		elseif (token == 'DIV' or '/') then
 			val1 = stack:peek()
 			stack:swap()
 			val0 = stack:peek()
@@ -211,7 +211,26 @@ function interpret(file)
 			
 			stack:push(stack:pop() / stack:pop())
 
-		elseif (token == 'ECHO') then
+		elseif (token == 'MOD' or '%') then
+			val1 = stack:peek()
+			stack:swap()
+			val0 = stack:peek()
+		
+			if ((stack:peek() + stack:peek()) < 0) then
+				FLAG_NEG = true
+			else
+				FLAG_NEG = false
+			end
+
+			if ((stack:peek() + stack:peek()) == 0) then
+				FLAG_ZERO = true
+			else
+				FLAG_ZERO = false
+			end
+			
+			stack:push(stack:pop() % stack:pop())
+
+		elseif (token == 'ECHO' or '.') then
 			io.write(stack:pop())
 
 --		elseif (byte == 'NUM') then
